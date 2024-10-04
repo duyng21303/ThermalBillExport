@@ -1,0 +1,119 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+body {
+    display: flex;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+}
+
+.form-container, .bill-container {
+    width: 50%;
+    padding: 20px;
+}
+
+.form-container {
+    border-right: 1px solid #ccc;
+}
+
+.bill-container {
+    padding-left: 40px;
+}
+
+.product {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+    .product img {
+        margin-right: 10px;
+    }
+
+.product-info {
+    margin-right: auto;
+}
+
+.quantity {
+    width: 50px;
+    padding: 5px;
+}
+
+
+
+.total-row {
+    font-weight: bold;
+}
+.thermal-bill {
+    width: 70mm; 
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    line-height: 1.2;
+    border: 1px solid #000;
+}
+
+.bill-header,
+.bill-footer {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+    .bill-header h2 {
+        margin: 0;
+        font-size: 16px;
+    }
+
+.bill-footer {
+    border-top: 1px dashed #000;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+.bill-items {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .bill-items th,
+    .bill-items td {
+        text-align: left;
+        padding: 5px 0;
+    }
+
+    .bill-items th {
+        border-bottom: 1px solid #000;
+    }
+
+.total {
+    font-weight: bold;
+    text-align: right;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #000;
+}

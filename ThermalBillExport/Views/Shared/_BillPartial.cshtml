@@ -1,0 +1,72 @@
+﻿@model ThermalBillExport.ViewModels.BillVM
+
+<body>
+    <div class="thermal-bill" style="width: 280px; font-family: Arial, sans-serif; font-size: 12px; margin: 0 auto; padding-left: 10px; padding-right: 10px;">
+        <div class="header-section">
+            <div class="header-left" style="text-align: left; flex-basis: 70%; margin-bottom: 10px;">
+                <p>Receipt No: <strong>#@Model.BillNumber</strong></p>
+                <p>Date: @Model.Date.ToString("dd.MM.yyyy hh:mm tt")</p>
+            </div>
+            <div class="header-left" style="text-align: left; flex-basis: 30%; margin-bottom: 10px;">
+                <p>Customer</p>
+            </div>
+        </div>
+        <hr />
+        <div class="bill-section" style="margin: 10px 0;">
+            <table class="bill-items" style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr>
+                        <th style="text-align: left; padding: 5px 0;">ITEM/ TECH</th>
+                        <th style="text-align: left; padding: 5px 0;">QTY</th>
+                        <th style="text-align: right; padding: 5px 0;">AMT</th> <!-- Căn phải cột AMT -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td style="text-align: left; padding: 5px 0;">@product.Name</td>
+                            <td style="text-align: left; padding: 5px 0;">@product.Quantity</td>
+                            <td style="text-align: right; padding: 5px 0;">@string.Format("${0:N2}", @product.Price)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Dấu gạch ngăn cách giữa sản phẩm và tổng cộng -->
+        <div class="separator" style="border-top: 1px solid #000; margin-top: 10px; margin-bottom: 10px;"></div>
+
+        <div class="total-section" style="width: 100%; margin-top: 10px;">
+            <table style="width: 100%;">
+                <tr>
+                    <td><strong>Sub total:</strong></td>
+                    <td style="text-align: right;"><strong>@string.Format("${0:N2}", Model.Products.Sum(p => p.Quantity * p.Price))</strong></td>
+                </tr>
+                <tr>
+                    <td>Discount:</td>
+                    <td style="text-align: right;">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Convenience Fee:</td>
+                    <td style="text-align: right;">$0.00</td>
+                </tr>
+                <tr>
+                    <td>Tax:</td>
+                    <td style="text-align: right;">$0.00</td>
+                </tr>
+                <tr>
+                    <td><strong>AMOUNT DUE:</strong></td>
+                    <td style="text-align: right;"><strong>$@string.Format("{0:N2}", Model.AmountDue)</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <hr />
+        <div class="header-left" style="text-align: left;">
+            <strong>PAYMENT</strong>
+        </div>
+    </div>
+
+    <button id="printBillBtn" data-products='@Html.Raw(Json.Serialize(Model.Products))' data-bill-number="@Model.BillNumber" data-convenience-fee="@Model.ConvenienceFee" data-amount-due="@Model.AmountDue" data-product="@Model.Products" class="btn btn-primary" onclick="downloadBill()">In hóa đơn</button>
+</body>
